@@ -2,7 +2,6 @@ package com.example.kotlin5
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.kotlin5.databinding.ActivityMainBinding
 import com.example.kotlin5.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {

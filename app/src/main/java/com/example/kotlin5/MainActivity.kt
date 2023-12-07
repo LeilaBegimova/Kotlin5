@@ -12,6 +12,7 @@ import com.example.kotlin5.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var count = 0
+    private var image: String? = null
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
         binding.viev.setImageURI(it)
@@ -23,11 +24,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState != null) {
-            Log.e("TAG", "onCreate: save pictures $savedInstanceState", )
+            Log.e("TAG", "onCreate: save pictures $savedInstanceState")
         }
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             val savedCount = savedInstanceState.getInt(COUNT_KEY)
-            Log.e("TAG", "onCreate: ${Problems.count}", )
+            Log.e("TAG", "onCreate: ${Problems.count}")
             Problems.count = savedCount
         }
 
@@ -59,17 +60,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        outState.putInt(COUNT_KEY, Problems.count)
-        if (Problems.galleryState != null) {
-            outState.putParcelable(GALLERY_KEY, Problems.galleryState!!)
-            Log.e("TAG", "onSaveInstanceState: Save data")
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            putInt(COUNT_KEY, Problems.count)
         }
     }
 
     companion object {
         const val COUNT_KEY = "count"
-        const val GALLERY_KEY = "galley"
     }
 }
